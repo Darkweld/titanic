@@ -1,0 +1,47 @@
+{
+  "name": "titanic",
+  "version": "1.0.0",
+  "description": "Titanic front-end app with node backend",
+  "main": "index.js",
+  "scripts": {
+    "start": "webpack --mode development",
+    "build": "webpack --mode production"
+  },
+  "babel": {
+    "presets": [
+      "env",
+      "react"
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Darkweld/titanic.git"
+  },
+  "keywords": [
+    "react",
+    "node",
+    "webpack"
+  ],
+  "author": "Darkweld",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Darkweld/titanic/issues"
+  },
+  "homepage": "https://github.com/Darkweld/titanic#readme",
+  "dependencies": {
+    "react": "^16.4.0",
+    "react-dom": "^16.4.0"
+  },
+  "devDependencies": {
+    "babel-core": "^6.26.3",
+    "babel-loader": "^7.1.4",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-react": "^6.24.1",
+    "css-loader": "^0.28.11",
+    "dotenv": "^5.0.1",
+    "express": "^4.16.3",
+    "style-loader": "^0.21.0",
+    "webpack": "^4.10.2",
+    "webpack-cli": "^2.1.4"
+  }
+}
