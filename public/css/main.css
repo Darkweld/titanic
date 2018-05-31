@@ -1,0 +1,16 @@
+/*html elements */
+
+body {
+  margin: 0;
+  background-color: dimgray;
+}
+
+
+/* wrappers, containers */
+
+
+.wrapper {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+}

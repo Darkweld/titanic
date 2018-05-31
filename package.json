@@ -30,7 +30,8 @@
   "homepage": "https://github.com/Darkweld/titanic#readme",
   "dependencies": {
     "react": "^16.4.0",
-    "react-dom": "^16.4.0"
+    "react-dom": "^16.4.0",
+    "react-transition-group": "^2.3.1"
   },
   "devDependencies": {
     "babel-core": "^6.26.3",

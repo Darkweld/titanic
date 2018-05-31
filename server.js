@@ -6,6 +6,9 @@ const routes = require("./routes/routes.js");
 const app = express();
 require("dotenv").load();
 
+app.set("view engine", "ejs");
+app.set("views", "public/html");
+
 app.use("/public", express.static(process.cwd() + "/public"));
 app.use("/dist", express.static(process.cwd() + "/dist"));
 app.use("/assets", express.static(process.cwd() + "/public/assets"));

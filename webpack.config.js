@@ -1,6 +1,6 @@
 module.exports = {
   entry: {
-    index: "./public/scripts/titanic.js"
+    titanic: "./public/scripts/titanic.js"
   },
   module: {
     rules: [
