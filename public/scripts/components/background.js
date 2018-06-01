@@ -2,8 +2,9 @@ import React from "react";
 import { CSSTransition, TransitionGroup } from "react-transition-group";
 import style from "../../css/main.css";
 
-class Background extends React.Component () {
+class Background extends React.Component {
   render() {
+
   return (
     <TransitionGroup className = {style.backgroundContainer}>
       <CSSTransition className = {style.slide} timeout = {1000}>
