@@ -28,6 +28,6 @@ body {
 .descriptionText {
   font-size: calc(1em + 0.5vw);
 }
-.textSubmerged {
+.submerged .descriptionText {
   color: white
 }
