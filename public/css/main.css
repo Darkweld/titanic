@@ -16,10 +16,15 @@ body {
 .water {
   position: absolute;
   bottom: 0;
-  background-color: red;
+  background-color: #3987c9;
   opacity: 0.5;
   z-index: 1;
   width: 100%;
+}
+.CenterContainer {
+  width: 75%;
+  margin: 0 auto;
+  background-color: white;
 }
 
 
@@ -28,6 +33,7 @@ body {
 .descriptionText {
   font-size: calc(1em + 0.5vw);
 }
-.submerged .descriptionText {
+.submerged {
+  font-size: calc(1em + 0.5vw);
   color: white
 }
