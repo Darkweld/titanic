@@ -7,8 +7,8 @@ import loremIpsum from "../assets/texts/loremipsum.js";
 
 function TextNode ({ bool, text }) {
   return (
-    <CSSTransition className = {style.slide} timeout = {1000}>
-      <p className = {(bool) ? style.submerged : style.descriptionText}> {text} </p>
+    <CSSTransition in = {bool} className = {style.submerge} timeout = {1000}>
+      <p className = {style.descriptionText}> {text} </p>
     </CSSTransition>
   );
 }
@@ -16,13 +16,12 @@ function TextNode ({ bool, text }) {
 
 class Content extends React.Component {
   render() {
-    let arr = this.props.content.map((v, i) => {
-      let submerged = (v[1] > this.props.breakpoint) ? true : false;
-       if (v[0] === "P") return <TextNode key = {i} bool = {submerged} text = {loremIpsum[i]} />
-    });
+    let arr = (this.props.heights) ? this.props.heights.map((v, i) => {
+       if (v[0] === "P") return <TextNode key = {i} bool = {v[2]} text = {loremIpsum[i]} />
+    }) : loremIpsum.map((v, i) =>  <p key = {i} className = {style.descriptionText}>{v}</p>);
 
   return (
-    <div className = {style.centerContainer}>
+    <div ref = {this.props.contentRef} className = {style.textContainer}>
       {arr}
     </div>
 
@@ -40,8 +39,8 @@ class Main extends React.Component {
     this.updateWater = this.updateWater.bind(this);
   }
   componentDidMount () {
-    this.water = setInterval(() => this.updateWater(), 100);
-    //this.water = setInterval(() => this.updateWater(), 100);
+    let arr = [...this.textContainerRef.current.childNodes].map((v) => [v.tagName, v.offsetTop, false]);
+    this.setState({heights: arr}, () => this.water = setInterval(() => this.updateWater(), 100));
   }
 
   componentWillUnmount() {
@@ -50,23 +49,21 @@ class Main extends React.Component {
 
   updateWater() {
     let ref = this.textContainerRef.current;
-    let arr = [...ref.childNodes].map((v) => [v.tagName, v.offsetTop]);
+    console.log(this.state.heights);
+    let arr = this.state.heights.map((v) => {
+      v[2] = (v[1] > ref.scrollHeight - this.state.submerged) ? true : false;
+      return;
+    });
     if (this.state.submerged > ref.scrollHeight) clearInterval(this.water);
-    this.setState({submerged: this.state.submerged + 1, heights: arr, bottom: ref.scrollHeight});
+    this.setState({submerged: this.state.submerged + 1, heights: arr});
   }
 
   render() {
-    let items = (this.state.heights) ? this.state.heights.map((v, i) => {
-      let submerged = (v[1] > Math.floor(this.state.bottom - this.state.submerged)) ? "submerged " : "";
-       if (v[0] === "P") return <p key = {i} className = {submerged + style.descriptionText}>{loremIpsum[i]}</p>
-      }) : loremIpsum.map((v, i) => <p key = {i} className = {style.descriptionText}>{v}</p>);
 
 
     return(
       <div className = {style.wrapper}>
-        <div className = {style.textContainer} ref = {this.textContainerRef}>
-          {items}
-        </div>
+        <Content contentRef = {this.textContainerRef} heights = {this.state.heights}/>
         <div ref = {this.waterRef} className = {style.water} style = {{height: this.state.submerged}}></div>
       </div>
 
