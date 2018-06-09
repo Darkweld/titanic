@@ -33,7 +33,9 @@ body {
 .descriptionText {
   font-size: calc(1em + 0.5vw);
 }
-.submerged {
-  font-size: calc(1em + 0.5vw);
-  color: white
+.submerge, .submerge-enter, .submerge-enter-active {
+}
+.submerge-enter-done {
+  transition: all 3s;
+  color: white;
 }
