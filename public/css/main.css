@@ -26,6 +26,13 @@ body {
   margin: 0 auto;
   background-color: white;
 }
+.textContainer {
+  z-index: 1;
+  position: absolute;
+}
+.textContainerSubmerged {
+  background-color: black;
+}
 
 
 /*texts */
@@ -33,9 +40,6 @@ body {
 .descriptionText {
   font-size: calc(1em + 0.5vw);
 }
-.submerge, .submerge-enter, .submerge-enter-active {
-}
-.submerge-enter-done {
-  transition: all 3s;
+.submergedText {
   color: white;
 }
