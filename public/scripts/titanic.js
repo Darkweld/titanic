@@ -63,8 +63,8 @@ class Main extends React.Component {
 
     return(
       <div className = {style.wrapper}>
-        <Content submerged = {true}/>
         <Content height = {this.state.height - this.state.submerged} textRef = {this.textContainerRef}/>
+        <Content submerged = {true}/>
         {this.state.start && <div className = {style.water} style = {{height: this.state.submerged}}></div>}
       </div>
 

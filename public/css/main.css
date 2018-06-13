@@ -29,6 +29,8 @@ body {
 .textContainer {
   z-index: 1;
   position: absolute;
+  background-color: dimgray;
+  overflow: hidden;
 }
 .textContainerSubmerged {
   background-color: black;
@@ -42,4 +44,5 @@ body {
 }
 .submergedText {
   color: white;
+  font-size: calc(1em + 0.5vw);
 }
