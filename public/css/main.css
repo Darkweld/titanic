@@ -29,20 +29,20 @@ body {
 .textContainer {
   z-index: 1;
   position: absolute;
-  background-color: dimgray;
+  background-color: lightgoldenrodyellow;
   overflow: hidden;
 }
 .textContainerSubmerged {
-  background-color: black;
+  background-color: darkslategray;
 }
 
 
 /*texts */
 
-.descriptionText {
+.descriptionText, .submergedText {
   font-size: calc(1em + 0.5vw);
+  margin: 0;
 }
 .submergedText {
   color: white;
-  font-size: calc(1em + 0.5vw);
 }

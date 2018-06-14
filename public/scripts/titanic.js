@@ -1,26 +1,28 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { CSSTransition, TransitionGroup } from "react-transition-group";
+//import { CSSTransition, TransitionGroup } from "react-transition-group";
 import style from "../css/main.css";
 //import slides from ../assets/slides.js;
 import loremIpsum from "../assets/texts/loremipsum.js";
 
-function TextNode ({ bool, text }) {
+function TextNode ({ bool, text, picture }) {
   return (
-    <CSSTransition in = {bool} classNames = {style.submerge} timeout = {100}>
-      <p className = {style.descriptionText}> {text} </p>
-    </CSSTransition>
+    <div className = {style.layoutDiv}>
+      <p className = {(bool) ? style.submergedText : style.descriptionText}>{text}</p>
+      {picture && <img className = {(bool) ? style.submergedPicture : style.picture} src = {picture} />}
+    </div>
   );
 }
 
 
+
 class Content extends React.Component {
   render() {
-    let arr = (this.props.submerged) ? loremIpsum.map((v, i) =>  <p key = {i} className = {style.submergedText}>{v}</p>)
-    : loremIpsum.map((v, i) =>  <p key = {i} className = {style.descriptionText}>{v}</p>);
+    let arr = loremIpsum.map((value, i) => <TextNode key = {i} bool = {this.props.submerged} text = {value} />);
+
 
   return (
-    <div ref = {this.props.textRef} style = {{"height": this.props.height || "auto"}} className = {(this.props.submerged) ? style.textContainerSubmerged : style.textContainer}>
+    <div ref = {this.props.textRef} style = {{"height": (this.props.submerged) ? "auto" : this.props.height  }} className = {(this.props.submerged) ? style.textContainerSubmerged : style.textContainer}>
       {arr}
     </div>
   );
@@ -65,7 +67,7 @@ class Main extends React.Component {
       <div className = {style.wrapper}>
         <Content height = {this.state.height - this.state.submerged} textRef = {this.textContainerRef}/>
         <Content submerged = {true}/>
-        {this.state.start && <div className = {style.water} style = {{height: this.state.submerged}}></div>}
+        {this.state.start && <div className = {style.water} style = {{height: this.state.submerged + 10}}></div>}
       </div>
 
     );
