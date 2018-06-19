@@ -7,22 +7,19 @@ import loremIpsum from "../assets/texts/loremipsum.js";
 
 function TextNode ({ bool, text, picture }) {
   return (
-    <div className = {style.layoutDiv}>
-      <p className = {(bool) ? style.submergedText : style.descriptionText}>{text}</p>
-      {picture && <img className = {(bool) ? style.submergedPicture : style.picture} src = {picture} />}
+    <div className = {(bool) ? style.submerged : style.layoutDiv}>
+      <p className = {style.descriptionText}>{text}</p>
+      {picture && <img className = {style.picture} />}
     </div>
   );
 }
 
-
-
 class Content extends React.Component {
   render() {
-    let arr = loremIpsum.map((value, i) => <TextNode key = {i} bool = {this.props.submerged} text = {value} />);
-
+    let arr = loremIpsum.map((value, i) => <TextNode key = {i} bool = {this.props.submerged} text = {value} picture = {true} />);
 
   return (
-    <div ref = {this.props.textRef} style = {{"height": (this.props.submerged) ? "auto" : this.props.height  }} className = {(this.props.submerged) ? style.textContainerSubmerged : style.textContainer}>
+    <div ref = {this.props.textRef} style = {{"height": (!this.props.started) ? "auto" : this.props.height  }} className = {(this.props.submerged) ? style.textContainerSubmerged : style.textContainer}>
       {arr}
     </div>
   );
@@ -49,7 +46,7 @@ class Main extends React.Component {
   }
 
   scrollCalc() {
-    if (Math.ceil(document.documentElement.scrollHeight - document.documentElement.scrollTop) >  document.documentElement.clientHeight) {
+    if (Math.ceil(document.documentElement.scrollHeight - document.documentElement.scrollTop) <= document.documentElement.clientHeight) {
       window.removeEventListener('scroll', this.scrollCalc, false);
       this.setState({start: true, height: this.textContainerRef.current.scrollHeight}, () => this.water = setInterval(() => this.updateWater(), 100));
     }
@@ -65,9 +62,9 @@ class Main extends React.Component {
 
     return(
       <div className = {style.wrapper}>
-        <Content height = {this.state.height - this.state.submerged} textRef = {this.textContainerRef}/>
+        <Content started = {this.state.start} height = {this.state.height - this.state.submerged} textRef = {this.textContainerRef}/>
         <Content submerged = {true}/>
-        {this.state.start && <div className = {style.water} style = {{height: this.state.submerged + 10}}></div>}
+        {this.state.start && <div className = {style.water} style = {{height: this.state.submerged}}></div>}
       </div>
 
     );
