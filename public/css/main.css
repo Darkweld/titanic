@@ -1,3 +1,12 @@
+/*media queries */
+
+@media screen and (min-width: 768px) {
+  .picture {
+    width: 300px;
+  }
+}
+
+
 /*html elements */
 
 body {
@@ -53,7 +62,7 @@ body {
   color: white;
 }
 .picture {
-  width: 300px;
+  width: 100%;
   height: 300px;
   background-color: red;
   float: right;

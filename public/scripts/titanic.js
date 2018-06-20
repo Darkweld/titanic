@@ -16,7 +16,7 @@ function TextNode ({ bool, text, picture }) {
 
 class Content extends React.Component {
   render() {
-    let arr = loremIpsum.map((value, i) => <TextNode key = {i} bool = {this.props.submerged} text = {value} picture = {true} />);
+    let arr = loremIpsum.map((value, i) => <TextNode key = {i} bool = {this.props.submerged} text = {value} picture = {(i % 3 === 0) && true} />);
 
   return (
     <div ref = {this.props.textRef} style = {{"height": (!this.props.started) ? "auto" : this.props.height  }} className = {(this.props.submerged) ? style.textContainerSubmerged : style.textContainer}>
