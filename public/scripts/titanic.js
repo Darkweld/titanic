@@ -3,7 +3,7 @@ import ReactDOM from "react-dom";
 //import { CSSTransition, TransitionGroup } from "react-transition-group";
 import style from "../css/main.css";
 //import slides from ../assets/slides.js;
-import loremIpsum from "../assets/texts/loremipsum.js";
+import titanicText from "../assets/texts/titanicText.js";
 
 function TextNode ({ bool, text, picture }) {
   return (
@@ -16,7 +16,7 @@ function TextNode ({ bool, text, picture }) {
 
 class Content extends React.Component {
   render() {
-    let arr = loremIpsum.map((value, i) => <TextNode key = {i} bool = {this.props.submerged} text = {value} picture = {(i % 3 === 0) && true} />);
+    let arr = titanicText.map((value, i) => <TextNode key = {i} bool = {this.props.submerged} text = {value.text} picture = {(value.picture) && true} />);
 
   return (
     <div ref = {this.props.textRef} style = {{"height": (!this.props.started) ? "auto" : this.props.height  }} className = {(this.props.submerged) ? style.textContainerSubmerged : style.textContainer}>
