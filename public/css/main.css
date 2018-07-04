@@ -38,11 +38,15 @@ body {
   margin: 0 auto;
   background-color: white;
 }
-.textContainer {
+.textContainer, .textContainerStarted {
   z-index: 1;
   position: absolute;
   background-color: lightgoldenrodyellow;
   overflow: hidden;
+  transition: height 25s ease-in;
+}
+.textContainerStarted {
+  height: 0;
 }
 .textContainerSubmerged {
   background-color: darkslategray;
