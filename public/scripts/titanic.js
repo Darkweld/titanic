@@ -5,24 +5,6 @@ import style from "../css/main.css";
 //import slides from ../assets/slides.js;
 import TitanicText from "../assets/texts/titanicText.js";
 
-function TextNode ({ bool, text, picture }) {
-  return (
-    <div className = {(bool) ? style.submerged : style.layoutDiv}>
-      <p className = {style.descriptionText}>{text}</p>
-      {picture && <img className = {style.picture} />}
-    </div>
-  );
-}
-
-class Content extends React.Component {
-  render() {
-
-  return (
-    <TitanicText />
-  );
-  }
-}
-
 class Main extends React.Component {
   constructor() {
     super();
@@ -59,8 +41,8 @@ class Main extends React.Component {
 
     return(
       <div className = {style.wrapper}>
-        <Content started = {this.state.start} height = {this.state.height - this.state.submerged} textRef = {this.textContainerRef}/>
-        <Content submerged = {true}/>
+        <TitanicText height = {(this.state.start) ? this.state.height - this.state.submerged : "auto"} textRef = {this.textContainerRef}/>
+        <TitanicText bool = {true}/>
         {this.state.start && <div className = {style.water} style = {{height: this.state.submerged}}></div>}
       </div>
 
