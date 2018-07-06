@@ -3,7 +3,7 @@ import ReactDOM from "react-dom";
 //import { CSSTransition, TransitionGroup } from "react-transition-group";
 import style from "../css/main.css";
 //import slides from ../assets/slides.js;
-import TitanicText from "../assets/texts/titanicText.js";
+import { TitanicText, TitanicTextSubmerged } from "../assets/texts/titanicText.js";
 
 class Main extends React.Component {
   constructor() {
@@ -27,7 +27,9 @@ class Main extends React.Component {
   scrollCalc() {
     if (Math.ceil(document.documentElement.scrollHeight - document.documentElement.scrollTop) <= document.documentElement.clientHeight) {
       window.removeEventListener('scroll', this.scrollCalc, false);
-      this.setState({start: true, height: this.textContainerRef.current.scrollHeight}, () => this.water = setInterval(() => this.updateWater(), 100));
+      let arr = [...this.textContainerRef.current.childNodes].map(v => v.clientHeight);
+
+      this.setState({start: true, height: this.textContainerRef.current.scrollHeight, divHeights: arr}, () => this.water = setInterval(() => this.updateWater(), 100));
     }
   }
 
@@ -41,8 +43,8 @@ class Main extends React.Component {
 
     return(
       <div className = {style.wrapper}>
-        <TitanicText height = {(this.state.start) ? this.state.height - this.state.submerged : "auto"} textRef = {this.textContainerRef}/>
-        <TitanicText bool = {true}/>
+        <TitanicText started = {this.state.start} height = {(this.state.start) ? this.state.height - this.state.submerged : "auto"} textRef = {this.textContainerRef}/>
+        {this.state.start && <TitanicTextSubmerged />}
         {this.state.start && <div className = {style.water} style = {{height: this.state.submerged}}></div>}
       </div>
 
