@@ -27,14 +27,14 @@ class Main extends React.Component {
   scrollCalc() {
     if (Math.ceil(document.documentElement.scrollHeight - document.documentElement.scrollTop) <= document.documentElement.clientHeight) {
       window.removeEventListener('scroll', this.scrollCalc, false);
-      let arr = [...this.textContainerRef.current.childNodes].map(v => v.clientHeight);
-
-      this.setState({start: true, height: this.textContainerRef.current.scrollHeight, divHeights: arr}, () => this.water = setInterval(() => this.updateWater(), 100));
+      let ref = this.textContainerRef.current;
+      let arr = [...ref.childNodes].map(v => v.clientHeight);
+      this.setState({start: true, height: ref.scrollHeight, divHeights: arr, shake: true }, () => this.timer = setTimeout(() => this.water = setInterval(() => this.updateWater(), 100), 3000));
     }
   }
 
   updateWater() {
-    if (this.state.submerged > this.state.height) clearInterval(this.water);
+    if (this.state.submerged >= this.state.height) clearInterval(this.water);
     this.setState({submerged: this.state.submerged + 1});
   }
 
@@ -43,8 +43,8 @@ class Main extends React.Component {
 
     return(
       <div className = {style.wrapper}>
-        <TitanicText started = {this.state.start} height = {(this.state.start) ? this.state.height - this.state.submerged : "auto"} textRef = {this.textContainerRef}/>
-        {this.state.start && <TitanicTextSubmerged />}
+        <TitanicText shake = {this.state.shake} height = {(this.state.start) ? this.state.height - this.state.submerged : "auto"} textRef = {this.textContainerRef}/>
+        {this.state.start && <TitanicTextSubmerged arr = {this.state.divHeights}/>}
         {this.state.start && <div className = {style.water} style = {{height: this.state.submerged}}></div>}
       </div>
 
