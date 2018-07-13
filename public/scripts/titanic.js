@@ -9,7 +9,7 @@ class Main extends React.Component {
   constructor() {
     super();
 
-    this.state = {submerged: 0, height: null, scroll: 0, start: false};
+    this.state = {submerged: 0, height: null, scroll: 0, start: false, shake: false};
     this.textContainerRef = React.createRef();
     //Binds
     this.updateWater = this.updateWater.bind(this);
@@ -20,6 +20,7 @@ class Main extends React.Component {
   }
 
   componentWillUnmount() {
+    clearTimeout(this.timer);
     clearInterval(this.water);
     window.removeEventListener('scroll', this.scrollCalc, false);
   }
@@ -29,7 +30,9 @@ class Main extends React.Component {
       window.removeEventListener('scroll', this.scrollCalc, false);
       let ref = this.textContainerRef.current;
       let arr = [...ref.childNodes].map(v => v.clientHeight);
-      this.setState({start: true, height: ref.scrollHeight, divHeights: arr, shake: true }, () => this.timer = setTimeout(() => this.water = setInterval(() => this.updateWater(), 100), 3000));
+      this.setState({start: true, height: ref.scrollHeight, divHeights: arr, shake: true }, () => {
+        window.scrollTo(0, document.documentElement.scrollHeight);
+        this.timer = setTimeout(() => this.water = setInterval(() => this.updateWater(), 100), 3000)});
     }
   }
 
@@ -43,7 +46,7 @@ class Main extends React.Component {
 
     return(
       <div className = {style.wrapper}>
-        <TitanicText shake = {this.state.shake} height = {(this.state.start) ? this.state.height - this.state.submerged : "auto"} textRef = {this.textContainerRef}/>
+        <TitanicText start = {this.state.start} shake = {this.state.shake} height = {(this.state.start) ? this.state.height - this.state.submerged : "auto"} textRef = {this.textContainerRef}/>
         {this.state.start && <TitanicTextSubmerged arr = {this.state.divHeights}/>}
         {this.state.start && <div className = {style.water} style = {{height: this.state.submerged}}></div>}
       </div>

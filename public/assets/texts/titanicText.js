@@ -1,10 +1,12 @@
 import React from "react";
 import style from "../../css/main.css";
 
-function TitanicText ({shake, height, textRef}) {
-  console.log(style.textContainerOverlay + " " + style.shakeThis);
+function TitanicText ({start, shake, height, textRef}) {
+  let name = (start) ? style.textContainerOverlay : style.textContainer;
+  let add = (shake) ? (" " + style.shakeThis) : "";
+  name = name + add;
   return (
-    <div className = { style.textContainerOverlay + (shake) ? " " + style.shakeThis : ""} style = {{height: height}} ref = {textRef}>
+    <div className = { name } style = {{height: height}} ref = {textRef}>
 
       <div className = {style.textDiv}>
         <p>In the late 19th and early 20th centuries, millions of people migrated from Europe to North America. With the massive quantities of people wanting to migrate, shippers began to accommodate this growing demand with large and extravagant passenger ships. Among the competing liners, two rose to prominence among the others. These were the White Star Line and Cunard, and they were fierce rivals in this field. In 1907, Cunard produced two passenger liners that broke speed records in
@@ -23,9 +25,9 @@ function TitanicText ({shake, height, textRef}) {
       <img src = "/assets/images/titanic01.jpg" className = {style.picture}></img>
         <p> The second and third class passenger’s facilities were not without amenities, however.  Second class amenities included a library, smoking room, dining room, and outdoor promenade. Third class passengers had an outdoor area, dining saloon, smoking room, and a “general room”, which was basically just a room for people to gather and interact. Second class rooms were also fairly large, including a sofa, bed, wardrobe, and storage space. Third class passenger rooms were similar in furnishing, but typically didn’t have much storage space, nor did it have a wardrobe. Many of the rooms were also shaped strangely in order to accommodate the ship’s shape. However, these rooms were still luxurious for third-class passengers of the time. It should be stated that second and third class passengers generally all had to share restrooms in order to conserve water and space. These were separated by gender. Bathing had to be requested, and would be drawn up by a steward. There were only two baths for the entire third class. </p>
       </div>
-      {shake && <div className = {style.textDiv}>
+      <div className = {style.textDivBig}>
         <p> That is, until it crashed... </p>
-      </div>}
+      </div>
     </div>
 
   );
@@ -37,6 +39,7 @@ function TitanicTextSubmerged (arr) {
     <div className = {style.textContainerSubmerged}>
 
       <div className = {style.textDiv} style = {{height: arr.arr[0]}}>
+        <img src = "/assets/images/titanic02.jpg" className = {style.picture}></img>
         <p>test test test test test test test test test. </p>
       </div>
       <div className = {style.textDiv}  style = {{height: arr.arr[1]}}>
@@ -49,6 +52,9 @@ function TitanicTextSubmerged (arr) {
       </div>
       <div className = {style.textDiv}  style = {{height: arr.arr[3]}}>
       <img src = "/assets/images/titanic02.jpg" className = {style.picture}></img>
+        <p> test test test test test test test test test. </p>
+      </div>
+      <div className = {style.textDivBig}  style = {{height: arr.arr[4]}}>
         <p> test test test test test test test test test. </p>
       </div>
     </div>
