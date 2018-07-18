@@ -79,15 +79,15 @@ body {
 }
 
 @keyframes shake {
-    0% { transform: translate(1vh, 1vh) rotate(0deg); }
-    10% { transform: translate(-1vh, -2vh) rotate(-1deg); }
-    20% { transform: translate(-3vh, 0) rotate(1deg); }
-    30% { transform: translate(3vh, 2vh) rotate(0deg); }
-    40% { transform: translate(1vh, -1vh) rotate(1deg); }
-    50% { transform: translate(-1vh, 2vh) rotate(-1deg); }
-    60% { transform: translate(-3vh, 1vh) rotate(0deg); }
-    70% { transform: translate(3vh, 1vh) rotate(-1deg); }
-    80% { transform: translate(-1vh, -1vh) rotate(1deg); }
-    90% { transform: translate(1vh, 2vh) rotate(0deg); }
-    100% { transform: translate(1vh, -2vh) rotate(-1deg); }
+    0% { transform: translate(10vh) }
+    10% { transform: translate(-10vh) }
+    20% { transform: translate(9vh) }
+    30% { transform: translate(-9vh) }
+    40% { transform: translate(8vh) }
+    50% { transform: translate(-8vh) }
+    60% { transform: translate(7vh) }
+    70% { transform: translate(-7vh) }
+    80% { transform: translate(6vh) }
+    90% { transform: translate(-6vh) }
+    100% { transform: translate(5vh) }
 }
